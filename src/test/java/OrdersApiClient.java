@@ -9,15 +9,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
-import java.util.List;
-
 @RunWith(Parameterized.class)
-public class createOrdersTest {
+public class OrdersApiClient {
 
-    private final  List<String> color;
+    private final List<String> color;
     private final int code;
 
     @Before
@@ -25,7 +25,7 @@ public class createOrdersTest {
         RestAssured.baseURI= BaseURI.BASE_URI;
     }
 
-    public createOrdersTest( List<String> color, int code) {
+    public OrdersApiClient( List<String> color, int code) {
         this.color = color;
         this.code = code;
     }
@@ -65,6 +65,25 @@ public class createOrdersTest {
         response.then().assertThat().body("track", notNullValue());
 
         response.then().assertThat().statusCode(this.code);
+
+    }
+
+    @Test
+    @DisplayName("Проверка списка заказов")
+    @Description("Проверка производится на значениях по умолчанию, включает в себя проверку ответа track на ненулевое значение и кода ответа 201")
+    @TmsLink("TestCase-112")
+    @Issue("BUG-985")
+    public void checkListOrdersTest() {
+
+        Response response =  given()
+                .header("Content-type", "application/json")
+                .and()
+                .when()
+                .get(BaseURI.ORDERS_ENDPOINT);
+
+        response.then().assertThat().body(notNullValue());
+
+        response.then().assertThat().statusCode(200);
 
     }
 
