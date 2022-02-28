@@ -1,6 +1,3 @@
-import classes.BaseURI;
-import classes.Courier;
-
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;

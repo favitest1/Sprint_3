@@ -1,5 +1,3 @@
-package classes;
-
 public class Courier {
 
     private String login;

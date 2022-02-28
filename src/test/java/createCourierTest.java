@@ -1,5 +1,3 @@
-import classes.BaseURI;
-import classes.Courier;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import io.qameta.allure.TmsLink;
